@@ -33,7 +33,7 @@ def add_item(name, amount, price):
         print(f'Failed to add a new record: {e}')
     
 # Aufruf der Funktion, um ein Lebensmittels hinzuzufügen
-add_item('Milch', '2 Packung', 2)
+# add_item('Milch', '2 Packung', 2)
 
 # Auslesen der kompletten Einkaufsliste
 def show_item():
@@ -43,9 +43,21 @@ def show_item():
     except sqlite3.Error as e:
         print(f'Failed to fetch a new record: {e}')
         
+    # Anzeige von Artikeln in der Konsole    
     for item in items:
         print(item)
+
+def update_item(id, name, amount, price):
+    try:
+        cursor.execute('''UPDATE groceries SET name = ?, amount = ?, price = ?
+                   WHERE id = ? ''', (name, amount, price, id))
+        conn.commit()
+        print(f"Row with id {id} updated")
+    except sqlite3.Error as e:
+        print(f'Failed to update the row with id {id} {e}')
         
+    
+update_item(1, 'Eier', '3 Packung', 5)      
 show_item()
 
 
