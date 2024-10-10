@@ -61,7 +61,7 @@ def update_item(id, name, amount, price):
 def delete_item(id):
     try:
         cursor.execute('''
-                   DELETE FROM groceries WHERE id = ?''', (id))
+                   DELETE FROM groceries WHERE id = ?''', (id,))
         conn.commit()
         print (f"Item with id {id} deleted")
         
