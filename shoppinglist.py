@@ -19,7 +19,26 @@ def create_table():
         conn.commit()
     except sqlite3.Error as e:
         print(e)
+
+# Aufruf der Funktion, um die Tabelle zu erstellen        
 create_table()
+
+# Hinzufügen eines neuen Lebensmittels
+def add_item(name, amount, price):
+    try:
+        cursor.execute('''INSERT INTO groceries (name, amount, price) VALUES (?, ?, ?)''', (name, amount, price))
+        conn.commit()
+        print(f"{name} wurde hinzugefügt")
+    except sqlite3.Error as e:
+        print(f'Failed to add a new record: {e}')
+    
+# Aufruf der Funktion, um einen Studenten hinzuzufügen
+add_item('Milch', '2 Packung', 2)
+
+
+
+
+    
 
 # # List to store shopping items
 # shoppinglist = []
