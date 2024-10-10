@@ -47,6 +47,7 @@ def show_item():
     for item in items:
         print(item)
 
+# Bearbeiten des Eintrags auf der Einkaufsliste
 def update_item(id, name, amount, price):
     try:
         cursor.execute('''UPDATE groceries SET name = ?, amount = ?, price = ?
@@ -54,10 +55,23 @@ def update_item(id, name, amount, price):
         conn.commit()
         print(f"Row with id {id} updated")
     except sqlite3.Error as e:
-        print(f'Failed to update the row with id {id} {e}')
+        print(f'Failed to update the item with id {id} {e}')
         
-    
-update_item(1, 'Eier', '3 Packung', 5)      
+# Zum Löschen des Eintrags aus der Einkaufsliste       
+def delete_item(id):
+    try:
+        cursor.execute('''
+                   DELETE FROM groceries WHERE id = ?''', (id))
+        conn.commit()
+        print (f"Item with id {id} deleted")
+        
+    except sqlite3.Error as e:
+        print(f'Failed to delete the item with id {id} {e}')
+        
+        
+
+update_item(1, 'Eier', '3 Packung', 5)
+delete_item(3)      
 show_item()
 
 
