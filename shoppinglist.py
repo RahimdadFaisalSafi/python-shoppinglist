@@ -32,25 +32,22 @@ def add_item(name, amount, price):
     except sqlite3.Error as e:
         print(f'Failed to add a new record: {e}')
     
-# Aufruf der Funktion, um einen Studenten hinzuzufügen
+# Aufruf der Funktion, um ein Lebensmittels hinzuzufügen
 add_item('Milch', '2 Packung', 2)
 
+# Auslesen der kompletten Einkaufsliste
+def show_item():
+    try:
+        cursor.execute('SELECT * FROM groceries')
+        items = cursor.fetchall()
+    except sqlite3.Error as e:
+        print(f'Failed to fetch a new record: {e}')
+        
+    for item in items:
+        print(item)
+        
+show_item()
 
 
 
     
-
-# # List to store shopping items
-# shoppinglist = []
-
-# # Function to add an item to the shopping list
-# def add_item():
-#     # Ask the user for an item
-#     item = input("Bitte gib den Artikel ein, der zur Einkaufsliste hinzugefügt werden soll: ")
-#     # Add the item to the shopping list
-#     shoppinglist.append(item)
-#     # Print a confirmation message
-#     print(f"{item} wurde der Einkaufsliste hinzugefügt.")
-
-# # Call the function to test
-# add_item()
